@@ -1,0 +1,10 @@
+
+x=list(map(''.join,permutations(l,2)))
+
+
+
+
+..1991.트리순회
+딕셔너리자료형,셋자료형
+자료형 : dictionary, list , tuple, set등이 속해 있는거고
+dic의 또 장점. 인덱스위치를 문자로 활용할 수 있어!

@@ -1,0 +1,37 @@
+https://juni-dev-log.tistory.com/132
+ㄴ 리스트합치기 + 의 시간,공간복잡도.
+
+
+#	1번
+n, m = map(int,input().split())
+arr = sorted(list(map(int,input().split())))
+pre_list =[0]*n
+#box=[]
+def dfs(box):
+    if len(box) == m :
+        print(*box)
+        return
+    for i in range(n):
+        if pre_list[i] == False:
+            pre_list[i] = True
+            dfs(box+[arr[i]])	##
+            pre_list[i] = False
+dfs([])
+#################
+#2번
+n, m = map(int,input().split())
+arr = sorted(list(map(int,input().split())))
+pre_list =[0]*n
+#box=[]
+def dfs(box):
+    if len(box) == m :
+        print(*box)
+        return
+    for i in range(n):
+        if pre_list[i] == False:
+            pre_list[i] = True
+            box.append(arr[i])  #
+            dfs(box)            #
+            box.pop() 			#
+            pre_list[i] = False
+dfs([])

@@ -1,0 +1,15 @@
+M = 5
+K = 2
+ways = []
+ans = []
+def dfs(start) :
+    if len(ans) == K :
+        print(' '.join(map(str, ans)))
+        ways.append(ans)
+        return
+    for n in range(start, M+1) :
+        ans.append(n)
+        dfs(n+1)
+        ans.pop()
+dfs(1)
+print(ways)

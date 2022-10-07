@@ -1,0 +1,23 @@
+1. dict.items() 사용
+dic=()
+for key, value in dic.items():
+    if x == value:
+        return key
+
+x = {'a': 10, 'b': 20, 'c': 30, 'd': 40}
+for key, value in x.items():
+    if 10 == value:
+        print(key)
+
+
+2. 최소공배수
+a = 6
+b = 15
+i = b
+arr=[]
+while True:
+    if (i%b,i%a) == (0,0):
+        print(i)
+        break
+    else: i+=1
+Ω

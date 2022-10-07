@@ -1,0 +1,27 @@
+투포인터 O(N)
+리스트에 순차적으로 접근해야 할 때 두개의 점의 위치를 기록하면서 처리하는 알고리즘
+
+특정한 합을 가지는 부분 연속 수열 찾기. 이중for문 :O(N^2),
+12325 -> 23,32,5
+
+1. M이하일땐 end를 하나증가(누적값증가)
+   M이상일땐 start를 하나증가(누적값감소)
+
+n = 5   #데이터의 개수
+m = 5   #찾고자하는 부분합
+data =[1,2,3,2,5]   #전체 수열
+
+count = 0
+interval_sum = 0
+end = 0
+
+for start in range(n):  #start를 증가시키며 반복
+    while interval_sum < m and end < n: #end를 가능한만큼 이동시키기
+        interval_sum += data[end]
+        end += 1
+    if interval_sum == m:   #부분합이 m일때 카운트증가
+        count += 1
+        interval_sum -= data[start]
+print(count)
+
+문제마다 구현방식은 달라.

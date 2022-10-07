@@ -1,0 +1,25 @@
+1. 페르마의 소정리
+(A*B)%C = (A%C * b%C)%C
+4^15 를 5로 나누려 한다
+(4^3)^5 = 4^3(mod 5) =64(mod5) = 64%5 =4. 나머지는 4
+2. 순열사용하기
+    from itertools import permutations ## 중복x
+    print(permutations(arr,2))
+    permutations(arr,2)
+    combinations +순열, >>>> arr에서 뺀 후에 join할때 타입조심. *join은 str만 가능
+3. 중복순열.
+    from itertools import product
+    product(arr, repeat = 2)문
+
+4. if return문
+5. enumerate 함수
+6. dfs를 통한 조합(combinations)구현
+     직관적 idea
+:combination([0,1,2,3], 2) = ([0],combination([1,2,3], 1))
++ ([1],combination([2,3], 1)) + ([2],combination([3], 1)))
+permutation([0,1,2,3], 2) = ([0],permutation([1,2,3], 1))
+ + ([1],permutation([0,2,3], 1)) + ([2],permutation([0,1,3], 1))
++ ([3],permutation([0,1,2], 1))
+
+
+출처: https://cotak.tistory.com/70 [TaxFree]

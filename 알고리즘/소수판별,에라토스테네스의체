@@ -1,0 +1,63 @@
+1. 소수판별 #모든수,#제곱근까지# targeting 하는 수에 대해서 사용가능. 범위는 x체
+#sqrt(N)*O(N)
+    import math
+    def prime_number(x):
+        for i in range(2,int(math.sqrt(x))+1):
+            if x % i == 0 :
+                return False
+        return True
+    print(prime_number(4))
+    print(prime_number(5))
+
+
+2. 에라토스테네스의 체 알고리즘  #O(NloglogN), 저장해야해서 메모리가 필요. #여기서도 sqrt체크하면
+while
+ 1)다수의 자연수에대해 소수판별
+ 2)n보다작거나 같은 모든 소수를 찾을때
+
+ 1. 2부터n까지 모든자연수나열
+ 2. 남은 수 중에서 처리하지않은 가장작은수 i를 검색
+ 3. 남은 수 중에서 i의 배수 모두 제거(i는 제거하지않음)
+ 4. 반복불가능할때까지 2,3반복
+    import math         #동비나코드#
+    array = [True for i in range(n+1)]
+    for i in range(2, int(math.sqrt(n))+1):
+        if array[i] == True :
+            j = 2
+            while i*j <= n :
+                array[i*j] = False
+                j += 1
+    for i in range(2, n+1) :    #모든소수출력
+        if array[i]:
+            print(i,end ='')
+
+
+
+for문
+num = [i for i in range(n + 1)]
+
+for i in range(2, int(math.sqrt(n))+1):
+    if not num[i]: continue #이미 0으로 처리되었으면 지나가
+
+# 그게 아니면 2부터 시작하는 i의 배수부터 시작해서 n까지 판별을 완료해줘야해
+    for j in range(i*i,n+1,i):
+        num[j]=False
+
+for i in num:
+    if i > 1:
+        answer.append(i)
+
+
+import math
+def prime_list(n):
+    arr = [True]*n
+    for i in range(2,math.sqrt(n)):
+        if arr[i] == True:
+            for j in range(i+i,n,i):# i의 첫번째 배수부터 i만큼 n까지
+                arr[j] = False
+    primelist = []
+    for i in range(2,n):
+        if arr[i]==True:
+            primelist.append(i)
+    #한줄로
+    # return [i for i in range(2,n) if arr[i]==True]
