@@ -1,7 +1,0 @@
-hashable
-unhashable한 자료형
-
-1차원리스트는 해쉬블
-2차원은 언해쉬블
-tuple은 hashable한 자료형
-set은 hashable한 자료형일 경우에만 가능
