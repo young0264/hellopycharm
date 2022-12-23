@@ -1,29 +1,18 @@
-from bisect import bisect_left
 n = int(input())
-dic=dict()
-arr=[0]*101
-HP = list(map(int,input().split()))
-happy = list(map(int,input().split()))
-hp_arr = [0]*n
-for i in range(1,n):
-    hp_arr[i] = 100-HP[i]-HP[i-1]
-hp_sumarr=[0]*n
-print("hp_arr",hp_arr)
-happy_arr=[0]*n #
-for i in range(n):
-    arr[HP[i]] = happy[i]
-    dic[HP[i]] = happy[i]
-print(dic)
-new_dic = sorted(dic.items())
-print(new_dic)
-print("hp_arr",hp_arr)
-for i in range(1,n):
-    idx = bisect_left(hp_arr,100-hp_arr[i])
-    if idx>0 and idx<n:
-        hp_arr[idx] = hp_arr[idx-1]+hp_arr[i]
-    print(hp_arr[i])
-    print("idx",idx)
-print(hp_arr)
+HP = [0] + list(map(int, input().split()))  # 잃는 체력
+Happy = [0] + list(map(int, input().split()))  # 얻는 기쁨
 
+dp = [[0] * (101) for _ in range(n + 1)]
+answer = 0
+for i in range(1, n + 1):
+    for j in range(1, 101):
+        if (100 - j) - HP[i] >= 0:
+            dp[i][100 - j] = max(dp[i - 1][100 - j - HP[i]] + Happy[i], dp[i - 1][100 - j])
+        else:
+            dp[i][100 - j] = dp[i - 1][100 - j]
+        answer = max(answer, dp[i][100 - j])
 
-
+# for i in dp:
+#     print(*i)
+# print(dp[-1][-2])
+print(answer)

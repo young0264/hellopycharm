@@ -5,6 +5,7 @@ dic={}
 arr = list(map(int,input().split()))
 new_arr = set(arr)
 real_arr=[]
+
 for i in new_arr:
     real_arr.append(i)
 real_arr.sort()
