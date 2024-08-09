@@ -1,46 +1,78 @@
 n = int(input())
 graph= [list(input()) for _ in range(n)]
-dx = [0,0,1]
-dy = [1,-1,0]
-ox = [1,-1,0]
-oy = [0,0,-1]
-#행
 res = 0
-for x in range(n):  # 가로줄
-    cnt = 1
-    for y in range(n-1):
-        if graph[x][y] == graph[x][y+1]:
-            cnt+=1
-        else:
-            for i in range(3):
-                nx = dx[i]+y
-                ny = dy[i]+(x+1)
-                if nx>=n or nx<0 or ny>=n or ny<0:
-                    break
-                if graph[x][y+1] == graph[nx][ny]:
-                    a = graph[x][y+1]
-                    graph[x][y+1] = graph[nx][ny]
-                    graph[nx][ny] = a
-                    cnt += 1
-                    break
-    res = max(cnt,res)
+dxs,dys = [0,0,1,-1],[1,-1,0,0] #동,서,남,북
+answer = 0
 
-for x in range(n):  #좌표상
-    cnt = 0
-    for y in range(n-1):
-        if graph[y][x] == graph[y+1][x]:
-            cnt+=1
-        else:
-            for i in range(3):
-                nx = ox[i]+y
-                ny = oy[i]+(x+1)
-                if nx>=n or nx<0 or ny>=n or ny<0:
-                    break
-                if graph[x+1][y] == graph[nx][ny]:
-                    a = graph[x+1][y]
-                    graph[x+1][y] = graph[nx][ny]
-                    graph[nx][ny] = a
-                    cnt += 1
-                    break
+def in_range(x,y):
+    return 0<=x<n and 0<=y<n
 
-print(res)
+for i in range(n):
+    for j in range(n):
+        for k in range(4):
+            # print("k : ",k)
+            dx,dy = i+dxs[k], j+dys[k]
+            if in_range(dx,dy) and graph[i][j] != graph[dx][dy]:
+                tmp = graph[i][j]
+                graph[i][j] = graph[dx][dy]
+                graph[dx][dy] = tmp
+                arr = graph[i]
+                brr = []
+                for l in range(n):
+                    brr.append(graph[l][j])
+
+                now1 = arr[0]
+                count1 = 1
+                for t in range(1,n):
+                    if arr[t] == now1:
+                        count1 += 1
+                    else:
+                        answer = max(answer,count1)
+                        count1 = 1
+                        now1 = arr[t]
+                # if i==1 and j==2:
+                #     print("arr,brr", arr,brr)
+                now2 = brr[0]
+                count2 = 1
+                for t in range(1,n):
+                    if brr[t] == now2:
+                        count2 += 1
+                    else:
+                        answer = max(answer,count2)
+                        count2 = 1
+                        now2 = brr[t]
+                answer = max(answer,count1, count2)
+                #swap again
+                graph[dx][dy] = graph[i][j]
+                graph[i][j] = tmp
+
+
+for i in range(n):
+    arr = graph[i][:]
+    now = arr[0]
+    count = 1
+    for j in range(1,n):
+        if arr[j] == now:
+            count += 1
+        else:
+            answer = max(answer,count)
+            count = 1
+            now = arr[j]
+    answer = max(answer,count)
+
+for i in range(n):
+    arr = []
+    for t in range(n):
+        arr.append(graph[t][i])
+    now = arr[0]
+    count = 1
+    for j in range(1,n):
+        if arr[j] == now:
+            count += 1
+        else:
+            answer = max(answer,count)
+            count = 1
+            now = arr[j]
+    answer = max(answer,count)
+
+print(answer)
